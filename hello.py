@@ -20,12 +20,3 @@ print("Username:", username)
 print("Bio:", bio)
 print("Followers:", followers)
 
-username = input("Enter username: ")
-age = input("Enter age: ")
-category = input("Enter content category: ")
-
-print("\nInstagram Profile")
-print("====================")
-print("username:", username)
-print("age:", age)
-print("category:", category)
