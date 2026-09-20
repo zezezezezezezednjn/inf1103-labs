@@ -1,5 +1,5 @@
-Inventory = 100
-failed_entries = 0
+Inventory = 0
+failed_entries = 0  
 amount_entered = 0
 
 def get_valid_input():
@@ -23,7 +23,7 @@ def get_valid_input():
 def processed_delivery(current_total, new_value):
     return current_total + new_value
 
-def calculate_tax(amount):
+def calculate_tax(amount):  #calculate tax for amount inputted by user
     after_tax = amount * 0.10
     return after_tax
 
@@ -47,7 +47,7 @@ while True:
 
     else:
         Inventory = processed_delivery(Inventory, stock)
-        amount_entered += stock
+        amount_entered += stock #calculate the amount user entered as total inventory not equal to delivery processed
         amount_taxed = calculate_tax(amount_entered)
         
 
