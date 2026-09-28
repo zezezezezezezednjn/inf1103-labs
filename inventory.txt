@@ -1,0 +1,5 @@
+1001, Wireless Mouse, 2
+1002, Keyboard, 1
+1003, USB Cable, 3
+1004, Phone, 2
+1005, Clock, 2
