@@ -1,9 +1,6 @@
 import json
 import os
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-JSON_PATH = os.path.join(BASE_DIR, "inventory.json")
-
 newproduct = {}
 
 def DisplayAll(): #1
@@ -18,7 +15,7 @@ def AddProduct(): #2
     id = input("Product ID: ")
     if any(product['ID'] == id for product in inventory):
         print("\nProduct ID already exists. Please enter a different ID.\n")
-        return
+        return {}
     name = input("Product Name: ")
     price = input("Product Price: ")
     stock = input("Product Stock: ")
@@ -58,11 +55,11 @@ def SearchProduct(): #4
         print("\nProduct ID not found. Please try again.\n")
 
 def SaveInventory(inventory): #6
-    with open(JSON_PATH, 'w') as f:
+    with open('inventory.json', 'w') as f:
         json.dump(inventory, f, indent=4)
 
 def LoadInventory(): #5
-    with open(JSON_PATH, 'r') as f:
+    with open('inventory.json', 'r') as f:
         inventory = json.load(f)
     return inventory    
 
