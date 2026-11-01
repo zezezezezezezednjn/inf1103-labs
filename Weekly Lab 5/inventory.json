@@ -16,5 +16,11 @@
         "Name": "Keyboard",
         "Price": "$45.00",
         "Stock": "25"
+    },
+    {
+        "ID": "P004",
+        "Name": "Q",
+        "Price": "$5.00",
+        "Stock": 3
     }
 ]
