@@ -1,5 +1,6 @@
-class Product:
+from abc import ABC, abstractmethod
 
+class Product(ABC):
     def __init__(self, product_id, name, price, stock):
         self.__product_id = product_id
         self.__name = name
@@ -19,7 +20,6 @@ class Product:
     def get_stock(self):
         return self.__stock
 
-    # ---------- Behaviour ----------
     def update_stock(self, quantity):
         if not isinstance(quantity, int) or quantity < 0:
             raise ValueError("Stock must be a whole number that is 0 or more.")
@@ -28,6 +28,10 @@ class Product:
     def display_information(self):
         print(f"ID: {self.__product_id:<6} | Name: {self.__name:<15} | "
               f"Price: ${self.__price:>9.2f} | Stock: {self.__stock}")
+
+    @abstractmethod
+    def get_fulfilment_info(self):
+        pass
 
     def to_dict(self):
         return {
@@ -50,6 +54,9 @@ class PhysicalProduct(Product):
         super().display_information()
         print(f"Weight: {self.__weight} kg")
 
+    def get_fulfilment_info(self):
+        return "This product requires physical shipping."
+
 class DigitalProduct(Product):
     def __init__(self, product_id, name, price, stock, file_size):
         super().__init__(product_id, name, price, stock)
@@ -61,3 +68,6 @@ class DigitalProduct(Product):
     def display_information(self):
         super().display_information()
         print(f"File Size: {self.__file_size} MB")
+
+    def get_fulfilment_info(self):
+        return "This product is delivered digitally."
