@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+
 class Product(ABC):
     def __init__(self, product_id, name, price, stock):
         self.__product_id = product_id
@@ -41,6 +42,14 @@ class Product(ABC):
             "stock": self.__stock,
         }
 
+    def to_dict(self):
+        return {
+            "id": self.__product_id,
+            "name": self.__name,
+            "price": self.__price,
+            "stock": self.__stock,
+        }
+
 class CanBeShipped(ABC):
     @abstractmethod
     def calculate_shipping_cost(self):
@@ -65,6 +74,12 @@ class PhysicalProduct(Product, CanBeShipped):
     def calculate_shipping_cost(self):
         return 10 + 3 * self.__weight
 
+    def to_dict(self):
+        data = super().to_dict()
+        data["type"] = "physical"
+        data["weight"] = self.__weight
+        return data
+
 class DigitalProduct(Product):
     def __init__(self, product_id, name, price, stock, file_size):
         super().__init__(product_id, name, price, stock)
@@ -79,3 +94,18 @@ class DigitalProduct(Product):
 
     def get_fulfilment_info(self):
         return "This product is delivered digitally."
+
+    def to_dict(self):
+        data = super().to_dict()
+        data["type"] = "digital"
+        data["download_size"] = self.__download_size
+        return data
+
+def product_from_dict(data):
+    if data["type"] == "physical":
+        return PhysicalProduct(data["id"], data["name"], data["price"],
+                               data["stock"], data["weight"])
+    elif data["type"] == "digital":
+        return DigitalProduct(data["id"], data["name"], data["price"],
+                              data["stock"], data["download_size"])
+

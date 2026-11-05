@@ -1,0 +1,10 @@
+[
+    {
+    "id": "P001",
+    "name": "Guitar",
+    "price": 450.0,
+    "stock": 3,
+    "type": "physical",
+    "weight": 2.5
+    }
+]
