@@ -120,20 +120,20 @@ def run_lab8_tests() -> None:
     print("=== 2. ASSOCIATION: Supplier <-> Product ===")
     supplier = Supplier("S001", "M", "email")
     guitar = PhysicalProduct("P001", "Guitar", 450.0, 3, supplier, 2.5)
-    ebook = DigitalProduct("D001", "eSIM", 30.0, 100, supplier, 5.5)
+    eSIM = DigitalProduct("D001", "eSIM", 30.0, 100, supplier, 5.5)
     guitar.display_supplier()
-    ebook.display_supplier()
+    eSIM.display_supplier()
 
     del supplier
     print("-- after 'del supplier' --")
     guitar.display_supplier()
-    ebook.display_supplier()
-    print("Same Supplier object shared:", guitar.get_supplier() is ebook.get_supplier())
+    eSIM.display_supplier()
+    print("Same Supplier object shared:", guitar.get_supplier() is eSIM.get_supplier())
 
     print("\n=== 3. AGGREGATION: Inventory <> Product ===")
     inv_a, inv_b = Inventory(), Inventory()
     inv_a.add_product(guitar)
-    inv_a.add_product(ebook)
+    inv_a.add_product(eSIM)
     inv_a.display_all()
 
     inv_a.remove_product("P001")
@@ -147,11 +147,11 @@ def run_lab8_tests() -> None:
     print("\n=== 4. COMPOSITION: Order <>-- OrderLine ===")
     order1 = Order("O001")
     order1.add_order_line(guitar, 1)
-    order1.add_order_line(ebook, 3)
+    order1.add_order_line(eSIM, 3)
     order1.display_order()
 
     order2 = Order("O002")
-    order2.add_order_line(ebook, 2)
+    order2.add_order_line(eSIM, 2)
     line1 = order1.get_order_lines()[1]
     line2 = order2.get_order_lines()[0]
     print("Different OrderLine objects:", line1 is not line2)
@@ -164,11 +164,11 @@ def run_lab8_tests() -> None:
 
     print("\n=== 6/7. LSP & POLYMORPHISM ===")
     show_product_details(guitar)
-    show_product_details(ebook)
+    show_product_details(eSIM)
 
     inventory = Inventory()
     inventory.add_product(guitar)
-    inventory.add_product(ebook)
+    inventory.add_product(eSIM)
     for product in inventory.get_products():       
         product.display_information()
         print(product.get_fulfilment_info())
